@@ -52,9 +52,9 @@ if (!class_exists('nguyenanhung\Libraries\URI\URI')) {
         /**
          * If $uri is set, we'll hydrate this object with it
          *
-         * @param string $uri {optional}
+         * @param string|null $uri {optional}
          */
-        public function __construct($uri = null)
+        public function __construct(string $uri = null)
         {
             if ($uri !== null) {
                 $this->fromString($uri);
@@ -78,7 +78,7 @@ if (!class_exists('nguyenanhung\Libraries\URI\URI')) {
          *
          * @return self
          */
-        public function fromString($uri)
+        public function fromString($uri): URI
         {
             if (is_numeric($uri)) { //Could be a valid url
                 $uri = '' . $uri;
@@ -112,7 +112,7 @@ if (!class_exists('nguyenanhung\Libraries\URI\URI')) {
          *
          * @return string
          */
-        public function getUri()
+        public function getUri(): string
         {
             $userPart = '';
             if ($this->getUser() !== null) {
@@ -154,7 +154,7 @@ if (!class_exists('nguyenanhung\Libraries\URI\URI')) {
          *
          * @return self
          */
-        public function setFragment($fragment)
+        public function setFragment(string $fragment): URI
         {
             $this->fragment = $fragment;
 
@@ -164,7 +164,7 @@ if (!class_exists('nguyenanhung\Libraries\URI\URI')) {
         /**
          * @return string
          */
-        public function getFragment()
+        public function getFragment(): string
         {
             return $this->fragment;
         }
@@ -174,7 +174,7 @@ if (!class_exists('nguyenanhung\Libraries\URI\URI')) {
          *
          * @return self
          */
-        public function setHost($host)
+        public function setHost(string $host): URI
         {
             $this->host = $host;
             $this->setAbsolute();
@@ -185,7 +185,7 @@ if (!class_exists('nguyenanhung\Libraries\URI\URI')) {
         /**
          * @return string
          */
-        public function getHost()
+        public function getHost(): string
         {
             return $this->host;
         }
@@ -195,7 +195,7 @@ if (!class_exists('nguyenanhung\Libraries\URI\URI')) {
          *
          * @return self
          */
-        public function setPass($pass)
+        public function setPass(string $pass): URI
         {
             $this->pass = $pass;
 
@@ -205,7 +205,7 @@ if (!class_exists('nguyenanhung\Libraries\URI\URI')) {
         /**
          * @return string
          */
-        public function getPass()
+        public function getPass(): string
         {
             return $this->pass;
         }
@@ -215,7 +215,7 @@ if (!class_exists('nguyenanhung\Libraries\URI\URI')) {
          *
          * @return self
          */
-        public function setPath($path)
+        public function setPath(string $path): URI
         {
             $this->path = $path;
 
@@ -225,7 +225,7 @@ if (!class_exists('nguyenanhung\Libraries\URI\URI')) {
         /**
          * @return string
          */
-        public function getPath()
+        public function getPath(): string
         {
             return $this->path;
         }
@@ -240,7 +240,7 @@ if (!class_exists('nguyenanhung\Libraries\URI\URI')) {
          * @see Sensimity_Helper_UriTest::provideSetQuery
          *
          */
-        public function setQuery($query)
+        public function setQuery(string $query): URI
         {
             $this->query = null;
             if (is_string($query)) {
@@ -253,7 +253,7 @@ if (!class_exists('nguyenanhung\Libraries\URI\URI')) {
         /**
          * @return string
          */
-        public function getQuery()
+        public function getQuery(): string
         {
             return $this->query;
         }
@@ -271,7 +271,7 @@ if (!class_exists('nguyenanhung\Libraries\URI\URI')) {
          * @see Sensimity_Helper_UriTest::provideSetScheme
          *
          */
-        public function setScheme($scheme)
+        public function setScheme(string $scheme): URI
         {
             $this->scheme = null;
             if (empty($scheme)) {
@@ -309,7 +309,7 @@ if (!class_exists('nguyenanhung\Libraries\URI\URI')) {
         /**
          * @return string
          */
-        public function getScheme()
+        public function getScheme(): string
         {
             return $this->scheme;
         }
@@ -319,7 +319,7 @@ if (!class_exists('nguyenanhung\Libraries\URI\URI')) {
          *
          * @return self
          */
-        public function setUser($user)
+        public function setUser(string $user): URI
         {
             $this->user = $user;
 
@@ -329,7 +329,7 @@ if (!class_exists('nguyenanhung\Libraries\URI\URI')) {
         /**
          * @return string
          */
-        public function getUser()
+        public function getUser(): string
         {
             return $this->user;
         }
@@ -343,7 +343,7 @@ if (!class_exists('nguyenanhung\Libraries\URI\URI')) {
          * @see Sensimity_Helper_UriTest::provideSetPort
          *
          */
-        public function setPort($port)
+        public function setPort($port): URI
         {
             $this->port = null;
             if ((is_string($port) || is_numeric($port)) && ctype_digit((string) $port)) {
@@ -356,7 +356,7 @@ if (!class_exists('nguyenanhung\Libraries\URI\URI')) {
         /**
          * @return int
          */
-        public function getPort()
+        public function getPort(): int
         {
             return $this->port;
         }
@@ -364,7 +364,7 @@ if (!class_exists('nguyenanhung\Libraries\URI\URI')) {
         /**
          * @return bool
          */
-        public function isRelative()
+        public function isRelative(): bool
         {
             return (!$this->absolute);
         }
@@ -372,7 +372,7 @@ if (!class_exists('nguyenanhung\Libraries\URI\URI')) {
         /**
          * @return bool
          */
-        public function isAbsolute()
+        public function isAbsolute(): bool
         {
             return ($this->absolute);
         }
@@ -380,7 +380,7 @@ if (!class_exists('nguyenanhung\Libraries\URI\URI')) {
         /**
          * @return $this
          */
-        public function setAbsolute()
+        public function setAbsolute(): URI
         {
             $this->absolute = true;
 
@@ -390,7 +390,7 @@ if (!class_exists('nguyenanhung\Libraries\URI\URI')) {
         /**
          * @return $this
          */
-        public function setRelative()
+        public function setRelative(): URI
         {
             $this->absolute = false;
 
@@ -405,7 +405,7 @@ if (!class_exists('nguyenanhung\Libraries\URI\URI')) {
          *
          * @return string
          */
-        public static function changeScheme($uri, $scheme = null)
+        public static function changeScheme($uri, $scheme = null): string
         {
             if ($scheme === null) { //null for scheme = just no change at all - only in this static function, for BC!
                 return $uri;
@@ -441,7 +441,7 @@ if (!class_exists('nguyenanhung\Libraries\URI\URI')) {
          * @copyright: 713uk13m <dev@nguyenanhung.com>
          * @time     : 08/18/2021 54:07
          */
-        public function isSchemeLess()
+        public function isSchemeLess(): bool
         {
             $scheme = $this->getScheme();
 
@@ -455,16 +455,16 @@ if (!class_exists('nguyenanhung\Libraries\URI\URI')) {
          * For very fine grained control over headers, you could use the Output
          * Library's set_header() function.
          *
-         * @param string $uri       URL
-         * @param string $method    Redirect method
+         * @param string   $uri     URL
+         * @param string   $method  Redirect method
          *                          'auto', 'location' or 'refresh'
-         * @param int    $code      HTTP Response status code
+         * @param int|null $code    HTTP Response status code
          *
          * @return    void
          *
          * @copyright https://www.codeigniter.com/
          */
-        public static function redirect($uri = '', $method = 'auto', $code = null)
+        public static function redirect(string $uri = '', string $method = 'auto', int $code = null)
         {
             // IIS environment likely? Use 'refresh' for better compatibility
             if ($method === 'auto' && isset($_SERVER['SERVER_SOFTWARE']) && strpos($_SERVER['SERVER_SOFTWARE'], 'Microsoft-IIS') !== false) {
