@@ -87,7 +87,7 @@ if (!class_exists('nguyenanhung\Libraries\URI\URI')) {
                 $uri = '';
             }
             $this->setRelative();
-            if (0 === strpos($uri, '//')) {
+            if (0 === mb_strpos($uri, '//')) {
                 $this->setAbsolute();
             }
             $parsed_url = parse_url($uri);
@@ -135,7 +135,7 @@ if (!class_exists('nguyenanhung\Libraries\URI\URI')) {
                        $fragmentPart;
             }
             $path    = $this->getPath();
-            $pathLen = strlen($path);
+            $pathLen = mb_strlen($path);
             if (0 !== $pathLen && '/' !== $path[0]) {
                 $path = '/' . $path;
             }
@@ -279,11 +279,11 @@ if (!class_exists('nguyenanhung\Libraries\URI\URI')) {
             }
             $schemePattern = '/[^a-zA-Z0-9\.\:\-]/';
             $scheme        = preg_replace($schemePattern, '', $scheme);
-            $scheme        = strtolower($scheme);
+            $scheme        = mb_strtolower($scheme);
             $scheme        = rtrim($scheme, ':/');
             $scheme        = trim($scheme, ':/');
             $scheme        = str_replace('::', ':', $scheme);
-            $schemeLen     = strlen($scheme);
+            $schemeLen     = mb_strlen($scheme);
             if ($schemeLen !== 0) {
                 if ($this->isRelative()) {
                     /* Explained: */
@@ -293,7 +293,7 @@ if (!class_exists('nguyenanhung\Libraries\URI\URI')) {
                     unset($exp[0]);
                     $this->setPath(null);
                     $path    = implode('/', $exp);
-                    $pathLen = strlen($path);
+                    $pathLen = mb_strlen($path);
                     if ($pathLen > 0) {
                         //Only create the "/" if theres a path
                         $this->setPath('/' . $path);
@@ -471,7 +471,7 @@ if (!class_exists('nguyenanhung\Libraries\URI\URI')) {
             }
 
             // IIS environment likely? Use 'refresh' for better compatibility
-            if ($method === 'auto' && isset($_SERVER['SERVER_SOFTWARE']) && strpos($_SERVER['SERVER_SOFTWARE'], 'Microsoft-IIS') !== false) {
+            if ($method === 'auto' && isset($_SERVER['SERVER_SOFTWARE']) && mb_strpos($_SERVER['SERVER_SOFTWARE'], 'Microsoft-IIS') !== false) {
                 $method = 'refresh';
             } elseif ($method !== 'refresh' && (empty($code) or !is_numeric($code))) {
                 if (isset($_SERVER['SERVER_PROTOCOL'], $_SERVER['REQUEST_METHOD']) && $_SERVER['SERVER_PROTOCOL'] === 'HTTP/1.1') {
