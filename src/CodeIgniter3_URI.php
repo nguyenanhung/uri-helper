@@ -126,10 +126,10 @@ class CodeIgniter3_URI
         if ($this->uri_string !== '') {
             // Remove the URL suffix, if present
             if (($suffix = $configUrlSuffix) !== '') {
-                $slen = strlen($suffix);
+                $slen = mb_strlen($suffix);
 
-                if (substr($this->uri_string, -$slen) === $suffix) {
-                    $this->uri_string = substr($this->uri_string, 0, -$slen);
+                if (mb_substr($this->uri_string, -$slen) === $suffix) {
+                    $this->uri_string = mb_substr($this->uri_string, 0, -$slen);
                 }
             }
 
@@ -172,10 +172,10 @@ class CodeIgniter3_URI
         $uri = isset($uri['path']) ? $uri['path'] : '';
 
         if (isset($_SERVER['SCRIPT_NAME'][0])) {
-            if (strpos($uri, $_SERVER['SCRIPT_NAME']) === 0) {
-                $uri = (string) substr($uri, strlen($_SERVER['SCRIPT_NAME']));
-            } elseif (strpos($uri, dirname($_SERVER['SCRIPT_NAME'])) === 0) {
-                $uri = (string) substr($uri, strlen(dirname($_SERVER['SCRIPT_NAME'])));
+            if (mb_strpos($uri, $_SERVER['SCRIPT_NAME']) === 0) {
+                $uri = (string) mb_substr($uri, mb_strlen($_SERVER['SCRIPT_NAME']));
+            } elseif (mb_strpos($uri, dirname($_SERVER['SCRIPT_NAME'])) === 0) {
+                $uri = (string) mb_substr($uri, mb_strlen(dirname($_SERVER['SCRIPT_NAME'])));
             }
         }
 
